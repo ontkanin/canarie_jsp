@@ -20,7 +20,7 @@ The script creates two files:
 
 ## Configuration
 
-Once installed, you need to modify the upload script to meet your needs
+Once installed, you need to modify the upload script to match your environment
 
 Edit `SETTINGS` section in `/usr/local/bin/canarie-bro-logs.sh`:
 
