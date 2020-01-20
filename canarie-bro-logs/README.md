@@ -7,7 +7,7 @@ By default, it only uploads `conn` and `notice` BRO logfiles, and only if they w
 
 ## Installation
 
-Download [canarie-bro-logs-setup.sh](canarie-bro-logs-setup.sh) to your BRO server, and run it as follows:
+Download [canarie-bro-logs-setup.sh](https://raw.githubusercontent.com/ontkanin/canarie_jsp/master/canarie-bro-logs/canarie-bro-logs-setup.sh) to your BRO server, and run it as follows:
 
 ```
 sh canarie-bro-logs-setup.sh
