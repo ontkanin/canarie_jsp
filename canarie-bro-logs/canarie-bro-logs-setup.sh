@@ -18,14 +18,14 @@
 cat <<'EOF_canarie_bro_logs' > /usr/local/bin/canarie-bro-logs.sh
 #!/bin/bash
 #
-## v2019.0120.1350
+## v2021.0105.1510
 
 ## SETTINGS ##
 ##
 
 ## Aggregation site settings
 SSH_ACCOUNT='EDIT-THIS'
-SSH_IP='132.205.9.148'
+SSH_IP='push.jointsecurity.ca'
 SSH_PORT='56320'
 
 ## Local BRO log folder
