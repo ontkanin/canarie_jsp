@@ -18,7 +18,7 @@
 cat <<'EOF_canarie_bro_logs' > /usr/local/bin/canarie-bro-logs.sh
 #!/bin/bash
 #
-## v2021.0105.1510
+## v2021.0105.1730
 
 ## SETTINGS ##
 ##
@@ -56,11 +56,15 @@ TODAY="$( date +'%Y-%m-%d' )/"
 YESTERDAY="$( date -d yesterday +'%Y-%m-%d' )/"
 
 [[ $ENABLE_UPLOAD -eq 0 ]] && exit
+
 BRO_LOGS_DIR="${BRO_LOGS_DIR%/}"
 
-for LOG in ${BRO_LOGS[*]}; do
-  rsync -rtve "ssh -p $SSH_PORT" --append-verify --include="$TODAY" --include="$YESTERDAY" --include="${LOG}.*.log.gz" --exclude="*" "${BRO_LOGS_DIR}/" ${SSH_ACCOUNT}@${SSH_IP}:~/ &>>$RSYNC_LOG
+INCLUDE_LOGS=()
+for ((i=0; i<${#BRO_LOGS[@]}; i++)); do
+  INCLUDE_LOGS+=(--include="${BRO_LOGS[$i]}.*.log.gz")
 done
+
+rsync -rtve "ssh -p $SSH_PORT" --append-verify --include="$TODAY" --include="$YESTERDAY" "${INCLUDE_LOGS[@]}" --exclude="*" "${BRO_LOGS_DIR}/" ${SSH_ACCOUNT}@${SSH_IP}:~/ >>$RSYNC_LOG
 EOF_canarie_bro_logs
 
 chmod 755 /usr/local/bin/canarie-bro-logs.sh
@@ -73,7 +77,7 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 MAILTO=root
 HOME=/
 
-30 * * * *    root  timeout 55m /usr/local/bin/canarie-bro-logs.sh
+$(($RANDOM%31+15)) * * * *    root  timeout 55m /usr/local/bin/canarie-bro-logs.sh
 EOF_canarie_bro_logs_cron
 
 chmod 644 /etc/cron.d/canarie-bro-logs.cron

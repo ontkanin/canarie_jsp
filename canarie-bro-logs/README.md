@@ -28,10 +28,10 @@ Edit `SETTINGS` section in `/usr/local/bin/canarie-bro-logs.sh`:
 * `SSH_IP`: IP address of the aggregation site; default: `push.jointsecurity.ca`
 * `SSH_PORT`: SSH port of the aggregation site; default: `56320`
 * `BRO_LOGS_DIR`: location of your BRO logfiles; default `/srv/bro/logs`
-* `BRO_LOGS`: BRO log types to upload (logfile names without their file extension); default: `conn` and `notice`
+* `BRO_LOGS`: BRO log types to upload (logfile names without their file extension or `*` for all log types); default: `conn` and `notice`
 * `RSYNC_LOG`: location for `rsync` transaction log; default: `/var/log/canarie/rsync.log`
 
-In order to configure `BRO_LOGS`, you can list all BRO log types on your server by running the following command, where `/srv/bro/logs` is the location of your BRO logfiles:
+In order to configure `BRO_LOGS`, you can list all BRO log types available on your server by running the following command, where `/srv/bro/logs` is the location of your BRO logfiles:
 
 ```
 find /srv/bro/logs -type f | awk -F/ '{print $NF}' | cut -d. -f1 | sort -u
@@ -75,6 +75,11 @@ syslog
 tunnel
 weird
 x509
+```
+
+If you want to upload all your BRO log files without explicitly listing every single one of them, use `'*'`. For example:
+```
+BRO_LOGS=( '*' )
 ```
 
 Once configured, set `ENABLE_UPLOAD=1` to enable the upload.
