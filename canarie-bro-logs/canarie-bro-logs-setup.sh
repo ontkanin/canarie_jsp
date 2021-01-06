@@ -18,14 +18,14 @@
 cat <<'EOF_canarie_bro_logs' > /usr/local/bin/canarie-bro-logs.sh
 #!/bin/bash
 #
-## v2021.0105.1730
+## v2021.0105.1830
 
 ## SETTINGS ##
 ##
 
 ## Aggregation site settings
 SSH_ACCOUNT='EDIT-THIS'
-SSH_IP='push.jointsecurity.ca'
+SSH_SITE='push.jointsecurity.ca'
 SSH_PORT='56320'
 
 ## Local BRO log folder
@@ -64,7 +64,7 @@ for ((i=0; i<${#BRO_LOGS[@]}; i++)); do
   INCLUDE_LOGS+=(--include="${BRO_LOGS[$i]}.*.log.gz")
 done
 
-rsync -rtve "ssh -p $SSH_PORT" --append-verify --include="$TODAY" --include="$YESTERDAY" "${INCLUDE_LOGS[@]}" --exclude="*" "${BRO_LOGS_DIR}/" ${SSH_ACCOUNT}@${SSH_IP}:~/ >>$RSYNC_LOG
+rsync -rtve "ssh -p $SSH_PORT" --append-verify --include="$TODAY" --include="$YESTERDAY" "${INCLUDE_LOGS[@]}" --exclude="*" "${BRO_LOGS_DIR}/" ${SSH_ACCOUNT}@${SSH_SITE}:~/ >>$RSYNC_LOG
 EOF_canarie_bro_logs
 
 chmod 755 /usr/local/bin/canarie-bro-logs.sh

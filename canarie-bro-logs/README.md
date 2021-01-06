@@ -25,7 +25,7 @@ Once installed, you need to modify the upload script to match your environment
 Edit `SETTINGS` section in `/usr/local/bin/canarie-bro-logs.sh`:
 
 * `SSH_ACCOUNT`: your SSH account name; replace `EDIT-THIS`
-* `SSH_IP`: IP address of the aggregation site; default: `push.jointsecurity.ca`
+* `SSH_SITE`: IP address or FQDN of the aggregation site; default: `push.jointsecurity.ca`
 * `SSH_PORT`: SSH port of the aggregation site; default: `56320`
 * `BRO_LOGS_DIR`: location of your BRO logfiles; default `/srv/bro/logs`
 * `BRO_LOGS`: BRO log types to upload (logfile names without their file extension or `*` for all log types); default: `conn` and `notice`
