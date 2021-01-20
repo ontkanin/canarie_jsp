@@ -28,10 +28,10 @@ SSH_ACCOUNT='EDIT-THIS'
 SSH_SITE='push.jointsecurity.ca'
 SSH_PORT='56320'
 
-## Local BRO log folder
+## Local ZEEK/BRO log folder
 BRO_LOGS_DIR='/srv/bro/logs'
 
-## BRO log types to upload
+## ZEEK/BRO log types to upload
 BRO_LOGS=(
   'conn'
   'notice'

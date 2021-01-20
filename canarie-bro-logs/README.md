@@ -1,13 +1,13 @@
 # canarie-bro-logs
-**CANARIE JSP BRO Logs Upload Script**
+**CANARIE JSP ZEEK/BRO Logs Upload Script**
 
-The [canarie-bro-logs-setup.sh](canarie-bro-logs-setup.sh) script configures your CANARIE JSP server to upload your local BRO logfiles to a remote CANARIE JSP aggregation site. Once installed, it uses `rsync` over `ssh` to allow for a secure and incremental logfiles upload.
+The [canarie-bro-logs-setup.sh](canarie-bro-logs-setup.sh) script configures your CANARIE JSP server to upload your local ZEEK/BRO logfiles to a remote CANARIE JSP aggregation site. Once installed, it uses `rsync` over `ssh` to allow for a secure and incremental logfiles upload.
 
-By default, it only uploads `conn` and `notice` BRO logfiles, and only if they were created `today` or `yesterday`.
+By default, it only uploads `conn` and `notice` ZEEK/BRO logfiles, and only if they were created `today` or `yesterday`.
 
 ## Installation
 
-Download [canarie-bro-logs-setup.sh](https://raw.githubusercontent.com/ontkanin/canarie_jsp/master/canarie-bro-logs/canarie-bro-logs-setup.sh) to your BRO server, and run it as follows:
+Download [canarie-bro-logs-setup.sh](https://raw.githubusercontent.com/ontkanin/canarie_jsp/master/canarie-bro-logs/canarie-bro-logs-setup.sh) to your ZEEK/BRO server, and run it as follows:
 
 ```
 sh canarie-bro-logs-setup.sh
@@ -27,11 +27,11 @@ Edit `SETTINGS` section in `/usr/local/bin/canarie-bro-logs.sh`:
 * `SSH_ACCOUNT`: your SSH account name; replace `EDIT-THIS`
 * `SSH_SITE`: IP address or FQDN of the aggregation site; default: `push.jointsecurity.ca`
 * `SSH_PORT`: SSH port of the aggregation site; default: `56320`
-* `BRO_LOGS_DIR`: location of your BRO logfiles; default `/srv/bro/logs`
-* `BRO_LOGS`: BRO log types to upload (logfile names without their file extension or `*` for all log types); default: `conn` and `notice`
+* `BRO_LOGS_DIR`: location of your ZEEK/BRO logfiles; default `/srv/bro/logs`
+* `BRO_LOGS`: ZEEK/BRO log types to upload (logfile names without their file extension or `*` for all log types); default: `conn` and `notice`
 * `RSYNC_LOG`: location for `rsync` transaction log; default: `/var/log/canarie/rsync.log`
 
-In order to configure `BRO_LOGS`, you can list all BRO log types available on your server by running the following command, where `/srv/bro/logs` is the location of your BRO logfiles:
+In order to configure `BRO_LOGS`, you can list all ZEEK/BRO log types available on your server by running the following command, where `/srv/bro/logs` is the location of your ZEEK/BRO logfiles:
 
 ```
 find /srv/bro/logs -type f | awk -F/ '{print $NF}' | cut -d. -f1 | sort -u
@@ -77,7 +77,7 @@ weird
 x509
 ```
 
-If you want to upload all your BRO log files without explicitly listing every single one of them, use `'*'`. For example:
+If you want to upload all your ZEEK/BRO log files without explicitly listing every single one of them, use `'*'`. For example:
 ```
 BRO_LOGS=( '*' )
 ```
